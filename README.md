@@ -67,7 +67,7 @@ while not exit:
 
             group_ok = False
 
-            while group_ok = False:
+            while group_ok == False:
                 if selection == str():
                     cursor.execute("INSERT INTO test.genres (genre) VALUES (?)", (selection.lower()))
                     cursor.execute("SELECT ID FROM test.groups WHERE groupe = (?)", (selection.lower()))
