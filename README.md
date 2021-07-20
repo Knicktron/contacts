@@ -47,7 +47,6 @@ while not exit:
     elif action == 3:
         another = True
         while another == True:
-            """
             firstname = input("First Name: ")
             secondname = input("Second Name: ")
             sirname = input("Sirname: ")
@@ -55,16 +54,34 @@ while not exit:
             mobile = str(input("Mobile number: "))
             mail1 = input("Email address: ")
             mail2 = input("Email address 2: ")
-            """
             print(" ")
             print("existing Groups:")
             cursor.execute("SELECT * FROM test.groups")
             groups = cursor.fetchall()
+            y = 0
             for x in groups:
                 print("[" + str(x[0]) + "] " + x[1].capitalize())
+                y =+ 1
             print("Please select a Groupe [] or [N]ew to create a new Groupe")
-            if input("[?]: ") == int():
-                pass
+            selection = input("[?]: ")
+
+            group_ok = False
+
+            while group_ok = False:
+                if selection == str():
+                    cursor.execute("INSERT INTO test.genres (genre) VALUES (?)", (selection.lower()))
+                    cursor.execute("SELECT ID FROM test.groups WHERE groupe = (?)", (selection.lower()))
+                    group = cursor.fetchall()
+                    group_ok = True
+                elif selection == int() and 1 <= y:
+                    group = selection
+                    group_ok = True
+                else:
+                    print("please try again")
+                    group_ok = False
+
+            add_contact(firstname, secondname, sirname, landline, mobile, mail1, mail2, group)
+
             print(" ")
             print("do you want to add another Contact?")
             another_contact = input("[Y]es/[N]o: ")
