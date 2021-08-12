@@ -13,14 +13,7 @@ This is one of my fist programs. So please be gentle.
 
 
 def main():
-    mydb = mariadb.connect(
-        host="hgp18.duckdns.org",
-        port=25555,
-        user="test",
-        password="test",
-        database="test"
-    )
-    cursor = mydb.cursor()
+
     print(" ")
     print("++++++++++++++++++++++++++++++++++++++++")
     print("Welcome to the Contact Management Fox")
