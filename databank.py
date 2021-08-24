@@ -23,6 +23,11 @@ def contact_view():
         print(contacts[0])
     print("----------------------------------------")
 
+def contact_search(search_input):
+    cursor.execute("SELECT * FROM test.contacts WHERE firstname OR secondname OR sirname OR OR landline OR mobile OR mailaddress1 OR mailaddress2 = %s",
+                   search_input)
+    result = cursor.fetchall()
+    print(result)
 
 def groupe_view():
     print(" ")
