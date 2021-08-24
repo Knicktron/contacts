@@ -24,7 +24,8 @@ def main():
         databank.contact_view()
 
     elif second_menu_choise == 2:
-        pass
+        search_value = input("Value to search for: ")
+        databank.contact_search(search_value)
 
     elif second_menu_choise == 3:
         contact_list = databank.contact_list()
@@ -64,6 +65,3 @@ else:
     print("[3] add Contact")
     print("[0] end programm")
 """
-
-
-
