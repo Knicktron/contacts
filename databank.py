@@ -35,6 +35,7 @@ def contact_view():
     mydb.commit()
     mydb.close()
 
+
 def contact_search(search_input):
     mydb = mariadb.connect(
         host="hgp18.duckdns.org",
@@ -45,14 +46,17 @@ def contact_search(search_input):
     )
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT * FROM test.contacts WHERE firstname OR secondname OR sirname OR OR landline OR mobile OR mailaddress1 OR mailaddress2 = %s",
-                   search_input)
+    cursor.execute(
+        "SELECT * FROM test.contacts WHERE firstname OR secondname OR sirname OR landline OR mobile OR mailaddress1 "
+        "OR mailaddress2 = %s",
+        search_input)
     result = cursor.fetchall()
     print(result)
 
     cursor.close()
     mydb.commit()
     mydb.close()
+
 
 def groupe_view():
     mydb = mariadb.connect(
@@ -79,6 +83,7 @@ def groupe_view():
     mydb.commit()
     mydb.close()
 
+
 def contact_list():
     first = input("First Name: ").lower()
     second = input("Second Name: ").lower()
@@ -97,59 +102,62 @@ def contact_list():
 
 class contact_insert:
 
-    mydb = mariadb.connect(
-        host="hgp18.duckdns.org",
-        port=25555,
-        user="test",
-        password="test",
-        database="test"
-    )
-    cursor = mydb.cursor()
-
     def __init__(self, cont_input):
-        self.con_id = cursor.fetchall()
+        self.input = cont_input
+        self.mydb = mariadb.connect(
+            host="hgp18.duckdns.org",
+            port=25555,
+            user="test",
+            password="test",
+            database="test"
+        )
+        self.cursor = self.mydb.cursor()
+        self.con_id = self.cursor.fetchall()
         self.fname = self.input
         self.input = cont_input
 
     def first_insert(self):
-        cursor.execute("INSERT INTO test.contacts (firstname) VALUES (%s)",
-                       self.input)
+        self.cursor.execute("INSERT INTO test.contacts (firstname) VALUES (%s)",
+                            self.input)
 
     def get_contact_id(self):
-        cursor.execute("SELECT id FROM test.contacts where firstname = %s",
-                       self.fname)
+        self.cursor.execute("SELECT id FROM test.contacts where firstname = %s",
+                            self.fname)
 
     def second_insert(self):
-        cursor.execute("UPDATE test.contacts SET secondname = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET secondname = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def last_insert(self):
-        cursor.execute("UPDATE test.contacts SET sirname = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET sirname = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def landl_insert(self):
-        cursor.execute("UPDATE test.contacts SET landline = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET landline = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def mobile_insert(self):
-        cursor.execute("UPDATE test.contacts SET mobile = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET mobile = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def mail1_insert(self):
-        cursor.execute("UPDATE test.contacts SET mailaddress1 = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET mailaddress1 = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def mail2_insert(self):
-        cursor.execute("UPDATE test.contacts SET mailaddress2 = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET mailaddress2 = '(%s)' WHERE ID = ",
+                            self.con_id)
 
     def group_insert(self):
-        cursor.execute("UPDATE test.contacts SET group = '(%s)' WHERE ID = ",
-                       self.con_id)
+        self.cursor.execute("UPDATE test.contacts SET group = '(%s)' WHERE ID = ",
+                            self.con_id)
 
-    cursor.close()
-    mydb.commit()
-    mydb.close()
+    def disconnect(self):
+        self.cursor.close()
+        self.mydb.commit()
+        self.mydb.close()
+
+
 
 """
 cursor.close()
