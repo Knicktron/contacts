@@ -4,18 +4,26 @@ import mariadb
 """
 functions for the sql database integration
 """
-
-mydb = mariadb.connect(
+"""mydb = mariadb.connect(
     host="hgp18.duckdns.org",
     port=25555,
     user="test",
     password="test",
     database="test"
 )
-cursor = mydb.cursor()
+cursor = mydb.cursor()"""
 
 
 def contact_view():
+    mydb = mariadb.connect(
+        host="hgp18.duckdns.org",
+        port=25555,
+        user="test",
+        password="test",
+        database="test"
+    )
+    cursor = mydb.cursor()
+
     cursor.execute("SELECT * FROM test.contacts")
     contacts = cursor.fetchall()
     print("----------------------------------------")
@@ -23,13 +31,38 @@ def contact_view():
         print(contacts[0])
     print("----------------------------------------")
 
+    cursor.close()
+    mydb.commit()
+    mydb.close()
+
 def contact_search(search_input):
+    mydb = mariadb.connect(
+        host="hgp18.duckdns.org",
+        port=25555,
+        user="test",
+        password="test",
+        database="test"
+    )
+    cursor = mydb.cursor()
+
     cursor.execute("SELECT * FROM test.contacts WHERE firstname OR secondname OR sirname OR OR landline OR mobile OR mailaddress1 OR mailaddress2 = %s",
                    search_input)
     result = cursor.fetchall()
     print(result)
 
+    cursor.close()
+    mydb.commit()
+    mydb.close()
+
 def groupe_view():
+    mydb = mariadb.connect(
+        host="hgp18.duckdns.org",
+        port=25555,
+        user="test",
+        password="test",
+        database="test"
+    )
+    cursor = mydb.cursor()
     print(" ")
     print("existing Groups:")
     cursor.execute("SELECT * FROM test.groups")
@@ -42,6 +75,9 @@ def groupe_view():
     print("----------------------------------------")
     print(" ")
 
+    cursor.close()
+    mydb.commit()
+    mydb.close()
 
 def contact_list():
     first = input("First Name: ").lower()
@@ -60,6 +96,16 @@ def contact_list():
 
 
 class contact_insert:
+
+    mydb = mariadb.connect(
+        host="hgp18.duckdns.org",
+        port=25555,
+        user="test",
+        password="test",
+        database="test"
+    )
+    cursor = mydb.cursor()
+
     def __init__(self, cont_input):
         self.con_id = cursor.fetchall()
         self.fname = self.input
@@ -101,7 +147,12 @@ class contact_insert:
         cursor.execute("UPDATE test.contacts SET group = '(%s)' WHERE ID = ",
                        self.con_id)
 
+    cursor.close()
+    mydb.commit()
+    mydb.close()
 
+"""
 cursor.close()
 mydb.commit()
 mydb.close()
+"""
