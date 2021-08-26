@@ -1,6 +1,7 @@
 #! python3
 import helpers
 import databank
+from time import sleep
 
 """
 'Contact Management Fox' by Niclas Fuchs, 2021-02-11
@@ -10,6 +11,7 @@ This is one of my fist programs. So please be gentle.
 
 
 def main():
+
     print(" ")
     print("++++++++++++++++++++++++++++++++++++++++")
     print("Welcome to the Contact Management Fox")
@@ -17,41 +19,52 @@ def main():
     print(" ")
     print(" ")
 
-    second_menu_choise = helpers.main_menu()
-    print(second_menu_choise)
+    continue_running = True
+    while continue_running:
 
-    if second_menu_choise == 1:
-        databank.contact_view()
+        second_menu_choise = helpers.main_menu()
+#        print(second_menu_choise)
 
-    elif second_menu_choise == 2:
-        search_value = input("Value to search for: ")
-        databank.contact_search(search_value)
+        if second_menu_choise == 1:
+            databank.contact_view()
 
-    elif second_menu_choise == 3:
-        contact_list = databank.contact_list()
-        if type(contact_list[0]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.first_insert(contact_list[0])
+        elif second_menu_choise == 2:
+            search_value = input("Value to search for: ")
+            databank.contact_search(search_value)
 
-        if type(contact_list[1]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.second_insert(contact_list[1])
+        elif second_menu_choise == 3:
+            contact_list = databank.contact_list()
+            if type(contact_list[0]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.first_insert(contact_list[0])
 
-        if type(contact_list[2]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.last_insert(contact_list[2])
+            if type(contact_list[1]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.second_insert(contact_list[1])
 
-        if type(contact_list[3]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.landl_insert(contact_list[3])
+            if type(contact_list[2]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.last_insert(contact_list[2])
 
-        if type(contact_list[4]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.mobile_insert(contact_list[4])
+            if type(contact_list[3]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.landl_insert(contact_list[3])
 
-        if type(contact_list[5]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.mail1_insert(contact_list[5])
+            if type(contact_list[4]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.mobile_insert(contact_list[4])
 
-        if type(contact_list[6]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.mail2_insert(contact_list[6])
+            if type(contact_list[5]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.mail1_insert(contact_list[5])
 
-        if type(contact_list[7]) == (not ('int' or 'NoneType')):
-            databank.contact_insert.group_insert(contact_list[7])
+            if type(contact_list[6]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.mail2_insert(contact_list[6])
+
+            if type(contact_list[7]) == (not ('int' or 'NoneType')):
+                databank.contact_insert.group_insert(contact_list[7])
+
+        elif second_menu_choise == 0:
+            print("---------------")
+            print("Logout")
+            sleep(1)
+            print("Have a nice Day")
+            print("---------------")
+            continue_running = False
 
 
 if __name__ == '__main__':
