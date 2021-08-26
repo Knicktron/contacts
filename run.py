@@ -23,7 +23,7 @@ def main():
     while continue_running:
 
         second_menu_choise = helpers.main_menu()
-#        print(second_menu_choise)
+#       print(second_menu_choise)
 
         if second_menu_choise == 1:
             databank.contact_view()
